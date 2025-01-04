@@ -1,0 +1,27 @@
+train: /home/zgm2024/CVpj/yolo/datasets/train/images
+val: /home/zgm2024/CVpj/yolo/datasets/val/images
+nc: 1  # 只有一个类别 'tampered'
+names: ['tampered']
+
+# 数据增强配置
+augmentation:
+  hsv_h: 0.03           # 色调变化幅度
+  hsv_s: 0.9            # 饱和度变化幅度
+  hsv_v: 0.7            # 亮度变化幅度
+  fliplr: 0.7           # 水平翻转概率
+  flipud: 0.3           # 垂直翻转概率
+  translate: 0.3        # 平移范围（相对宽高比例）
+  scale: 0.8            # 缩放范围
+  degrees: 25           # 旋转角度范围
+  shear: 15             # 剪切角度范围
+  mosaic: True          # 启用马赛克增强
+  mixup: True           # 启用混合增强
+
+# 训练超参数设置（可选）
+hyp:
+  lr0: 0.01             # 初始学习率
+  momentum: 0.937       # 动量
+  weight_decay: 0.0005  # 权重衰减
+  warmup_epochs: 3.0    # 预热轮次
+  warmup_momentum: 0.8  # 预热动量
+  warmup_bias_lr: 0.1   # 预热偏置学习率
