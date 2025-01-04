@@ -1,0 +1,62 @@
+\section{Task Introduction}
+\label{sec:intro}
+%-------------------------------------------------------------------------
+\subsection{Task Background}
+
+Verification of vouchers and documents is a perennial topic in financial scenarios and holds extremely important application value in various fields. In particular, the exploration of tampering detection in non-standard documents has always been an important research direction in both industry and academia. With the continuous development of information technology, a large amount of data and information is rapidly flooding into our lives, and the authenticity and reliability of these data and information are crucial. The rapid innovative growth in multimedia technology has made it easily accessible to play with image editing software, which could result in the desired manipulation of the original content. Images are often used as solid evidence in legal proceedings.\cite{SANDHYA2024301663, LiuHaoyue2021RGBN} In the context of digital financial services, the verification of vouchers and documents is even more important. The essence of digital finance is based on the flow and exchange of data and information, and the authenticity and reliability of these data and information are key to whether digital financial services can proceed smoothly. For example, in digital payment scenarios, the authenticity of user payment vouchers directly affects the security and efficiency of payments; in digital lending scenarios, the authenticity of the personal loan information provided by borrowers is the foundation for assessing their repayment ability and risk level. Moreover, the transaction processes and business models in digital finance also raise higher requirements for the verification of vouchers and documents. In digital financial transactions, the verification of vouchers and documents not only needs to ensure their authenticity and reliability, but also needs to guarantee that they are tamper-proof and cannot be forged, to ensure the security and credibility of digital financial transactions. Therefore, the verification of vouchers and documents holds critical application value in digital finance, and developing a set of universal tampering detection algorithms to ensure the authenticity of data collection in various complex scenarios is not only of great business value but also helps reduce various fraud risks, providing a reliable data and information foundation for digital financial services and promoting the stable development of the digital finance industry.
+
+In recent years, deep neural networks (DNNs), such as Convolutional Neural Network (CNN), Recurrent Neural Network (RNN) and Generative Adversarial Networks (GAN) have shown to be capable of characterizing the complex statistical dependencies from high-dimensional sensory inputs and efficiently learning their hierarchical representations, allowing them generalize well across a wide variety of computer vision (CV) tasks, including image forgery detection.\cite{8977568, article}
+
+In this experiment, we will build upon existing detection models and make adjustments and innovations to design an algorithm that identifies tampered regions in voucher images.
+
+\subsection{Task Data}
+
+\subsubsection{Data Format}
+
+The image data used for training and validation can be categorized into shooting documents, receipts, scanned documents/PDFs, and street view photos, etc. The formats of the images include jpg, JPEG, and png, and each image file has a corresponding index.
+
+Some of these images may have been tampered with using common methods such as copy-move, splicing, or removal, as well as more recent deep learning-based image generation techniques.
+
+Tampering localization has also become a research hotspot in image tampering detection tasks in recent years. In practical applications, merely detecting whether an image has been tampered with is not sufficient. It is necessary to also identify where the tampering has occurred in the image.\cite{18512} For simplicity, in this experiment, all tampered regions are assumed to be rectangular.
+
+The label file stores the tampered region (which may be empty) corresponding to each image file, and the specific format is as follows:
+\begin{quote}
+  [\dots
+
+  \{``id'': ``fileName'', ``region'': [$[x_1, y_1, x_2, y_2]$]\},
+
+  \dots,
+
+  \{``id'': ``fileName2'', ``region'': []\},
+
+  \dots]
+\end{quote}
+
+fileName refers to the corresponding image file name. If the image is tampered with, the region is $[x_1, y_1, x_2, y_2]$, representing the pixel coordinates of the top-left and bottom-right corners of the rectangular tampered area. If not tampered with, the region is empty.
+
+\subsubsection{Data Split}
+
+The images in the above format are divided into a training set and a test set, with the respective quantities of 13,000 images and 5,000 images.
+
+The training set has a corresponding label file `label\_train.json' for training, which stores the tampered regions (which may be empty) for each image in the training set. The filenames in the training set are all in the format `train\_$index$', such as `train\_8359.jpg'.
+
+For the YOLO model, we split 20\% of the training set as validation set, which is used for testing the model's training results to avoid overfitting.
+
+The test set is held by the competition organizers and serves as the final evaluation basis. It is not public to avoid participants directly training on the test set. The trained model will be evaluated on the test set, generating a prediction label file that will be compared with the actual tampered regions.
+
+\subsection{Evaluation Criteria}
+
+For the training results, the predictidon accuracy needs to be calculated. In this experiment, we use the micro-average $Micro-F1$ as the prediction accuracy metric. The predicted $region$ field corresponding to each $id$ is compared with the true labels, and based on a threshold, the values for True Positive ($TP$), True Negative ($TN$), False Positive ($FP$), and False Negative ($FN$) are computed. These values are then used to calculate precision ($P$) and recall ($R$), and finally, the $Micro-F1$ score is computed. The specific calculation formulas are as follows:
+
+\begin{equation}
+  P_{micro} = \frac{\sum_{i=1}^nTP_i}{\sum_{i=1}^nTP_i + \sum_{i=1}^nFP_i}
+  \label{eq:p-micro}
+\end{equation}
+\begin{equation}
+  R_{micro} = \frac{\sum_{i=1}^nTP_i}{\sum_{i=1}^nTP_i + \sum_{i=1}^nFN_i}
+  \label{eq:r-micro}
+\end{equation}
+\begin{equation}
+  F1_{micro} = \frac{2 \times P_{micro} \times R_{micro}}{P_{micro} + R_{micro}}
+  \label{eq:f1-micro}
+\end{equation}

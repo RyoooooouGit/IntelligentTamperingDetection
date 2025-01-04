@@ -1,0 +1,90 @@
+% CVPR 2025 Paper Template; see https://github.com/cvpr-org/author-kit
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage{ctex}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage[T1]{fontenc}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+% \usepackage{cvpr}              % To produce the CAMERA-READY version
+\usepackage[review]{cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% hyperref with option pagebackref eases the reviewers' job.
+% Please disable hyperref *only* if you encounter grave issues, 
+% e.g. with the file validation for the camera-ready version.
+%
+% If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+%\def\paperID{*****} % *** Enter the Paper ID here
+\def\paperID{22302010011} % *** Enter the Paper ID here
+\def\confName{CVPR}
+\def\confYear{2024}
+
+%%%%%%%%% TITLE - PLEASE UPDATE
+%\title{\LaTeX\ Author Guidelines for \confName~Proceedings}
+\title{Intelligent Document Tampering Detection \confName~Experiment Report}
+
+%%%%%%%%% AUTHORS - PLEASE UPDATE
+%\author{First Author\\
+%Institution1\\
+%Institution1 address\\
+%{\tt\small firstauthor@i1.org}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+%\and
+%Second Author\\
+%Institution2\\
+%First line of institution2 address\\
+%{\tt\small secondauthor@i2.org}
+%}
+
+\author{Team Name\\
+{\tt\small 专业课和我作队}
+\and
+郑光铭\\
+{\tt\small 22302010014}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+陈柏滔\\
+{\tt\small 22302010008}
+\and
+黄宸一\\
+{\tt\small 22302010011}
+}
+
+
+\begin{document}
+\maketitle
+\input{sec/0_摘要}
+\input{sec/1_任务介绍}
+\input{sec/2_实验步骤}
+\input{sec/3_实验结果及分析}
+\input{sec/4_小组信息}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
+}
+
+% WARNING: do not forget to delete the supplementary pages from your submission 
+% \input{sec/X_suppl}
+
+\end{document}
